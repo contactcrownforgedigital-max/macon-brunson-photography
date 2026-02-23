@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gallery — Macon Brunson Photography</title>
+
+<style>
+:root{
+  --bg:#0a0a0c;
+  --text:#f5f5f5;
+  --muted:rgba(255,255,255,.6);
+  --line:rgba(255,255,255,.12);
+  --radius:20px;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+a{text-decoration:none;color:inherit}
+.container{width:min(1300px, calc(100% - 40px));margin:auto}
+
+/* NAV */
+.nav{
+  position:fixed;
+  top:0;
+  width:100%;
+  background:rgba(0,0,0,.7);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+  z-index:100;
+}
+.nav-inner{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:16px 0;
+}
+.brand{
+  text-transform:uppercase;
+  font-weight:700;
+  letter-spacing:.2em;
+  font-size:12px;
+}
+.navlinks{
+  display:flex;
+  gap:18px;
+  align-items:center;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
+.navlinks a{
+  font-size:13px;
+  color:var(--muted);
+  padding:6px 8px;
+  border-radius:999px;
+}
+.navlinks a:hover{
+  color:#fff;
+  background:rgba(255,255,255,.06);
+}
+
+/* HEADER */
+header{
+  padding:110px 0 26px;
+  text-align:center;
+}
+header h1{
+  margin:0;
+  font-size:34px;
+  letter-spacing:.01em;
+}
+header p{
+  margin-top:10px;
+  color:var(--muted);
+  line-height:1.6;
+}
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+  padding:10px 0 80px;
+}
+.tile{
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  overflow:hidden;
+  background:#000;
+  cursor:pointer;
+  position:relative;
+  transform:translateZ(0);
+}
+.tile::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(to top, rgba(0,0,0,.25), rgba(0,0,0,0));
+  opacity:0;
+  transition:opacity .25s ease;
+  pointer-events:none;
+}
+.tile:hover::after{opacity:1}
+
+.tile img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  aspect-ratio:4/5;      /* consistent tile shape */
+  transition:transform .35s ease;
+}
+.tile:hover img{transform:scale(1.06)}
+
+/* LIGHTBOX */
+.lightbox{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.92);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:999;
+  padding:20px;
+}
+.lightbox.open{display:flex}
+.lightbox img{
+  max-width:min(92vw, 1200px);
+  max-height:86vh;
+  border-radius:var(--radius);
+  border:1px solid rgba(255,255,255,.12);
+  background:#000;
+}
+.lightbox button{
+  position:absolute;
+  border:1px solid var(--line);
+  background:rgba(0,0,0,.55);
+  color:#fff;
+  cursor:pointer;
+  border-radius:12px;
+  padding:12px 16px;
+}
+.lb-prev, .lb-next{
+  top:50%;
+  transform:translateY(-50%);
+  font-size:28px;
+  padding:16px 20px;
+}
+.lb-prev{left:26px}
+.lb-next{right:26px}
+.lb-close{
+  top:22px;
+  right:22px;
+  font-size:14px;
+}
+
+footer{
+  text-align:center;
+  padding:40px 0;
+  border-top:1px solid var(--line);
+  color:var(--muted);
+  font-size:13px;
+}
+
+@media(max-width:1000px){
+  .grid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:760px){
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .lb-prev{left:12px}
+  .lb-next{right:12px}
+  .lb-close{right:12px}
+}
+@media(max-width:460px){
+  .grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+
+<div class="nav">
+  <div class="container nav-inner">
+    <div class="brand">MACON BRUNSON PHOTOGRAPHY</div>
+    <div class="navlinks">
+      <a href="./index.html">Home</a>
+      <a href="./gallery.html">Gallery</a>
+      <a href="./videos.html">Video</a>
+      <a href="./index.html#contact">Contact</a>
+    </div>
+  </div>
+</div>
+
+<header class="container">
+  <h1>Gallery</h1>
+  <p>Click any photo to view full screen.</p>
+</header>
+
+<main class="container">
+  <div class="grid" id="grid"></div>
+</main>
+
+<footer>
+  © <span id="year"></span> Macon Brunson Photography
+</footer>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button class="lb-close" id="lbClose" aria-label="Close">Close</button>
+  <button class="lb-prev" id="lbPrev" aria-label="Previous">‹</button>
+  <img id="lbImg" alt="Expanded photo">
+  <button class="lb-next" id="lbNext" aria-label="Next">›</button>
+</div>
+
+<script>
+document.getElementById("year").textContent = new Date().getFullYear();
+
+const grid = document.getElementById("grid");
+const lightbox = document.getElementById("lightbox");
+const lbImg = document.getElementById("lbImg");
+const lbPrev = document.getElementById("lbPrev");
+const lbNext = document.getElementById("lbNext");
+const lbClose = document.getElementById("lbClose");
+
+const MAX_PHOTOS = 200;       // increase if needed
+const sources = [];
+let current = 0;
+
+// Build tiles ONLY for images that exist
+for (let i = 1; i <= MAX_PHOTOS; i++) {
+  const src = `assets/photos/p${i}.jpg`;
+  const img = new Image();
+  img.src = src;
+  img.loading = "lazy";
+
+  img.onload = () => {
+    const index = sources.push(src) - 1;
+
+    const tile = document.createElement("div");
+    tile.className = "tile";
+
+    const thumb = document.createElement("img");
+    thumb.src = src;
+    thumb.alt = `Photo ${i}`;
+    thumb.loading = "lazy";
+
+    tile.appendChild(thumb);
+    grid.appendChild(tile);
+
+    tile.addEventListener("click", () => openLightbox(index));
+  };
+
+  img.onerror = () => {
+    // ignore missing images
+  };
+}
+
+function openLightbox(index){
+  current = index;
+  lbImg.src = sources[current];
+  lightbox.classList.add("open");
+  lightbox.setAttribute("aria-hidden","false");
+}
+
+function closeLightbox(){
+  lightbox.classList.remove("open");
+  lightbox.setAttribute("aria-hidden","true");
+  lbImg.src = "";
+}
+
+function showImage(index){
+  if(!sources.length) return;
+  current = (index + sources.length) % sources.length;
+  lbImg.src = sources[current];
+}
+
+lbNext.addEventListener("click", () => showImage(current + 1));
+lbPrev.addEventListener("click", () => showImage(current - 1));
+lbClose.addEventListener("click", closeLightbox);
+
+// click outside image closes
+lightbox.addEventListener("click", (e) => {
+  if(e.target === lightbox) closeLightbox();
+});
+
+// keyboard navigation
+window.addEventListener("keydown", (e) => {
+  if(!lightbox.classList.contains("open")) return;
+  if(e.key === "ArrowRight") showImage(current + 1);
+  if(e.key === "ArrowLeft") showImage(current - 1);
+  if(e.key === "Escape") closeLightbox();
+});
+</script>
+
+</body>
+</html>

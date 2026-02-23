@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Macon Brunson Photography</title>
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+<style>
+:root{
+  --bg:#0a0a0c;
+  --text:#ffffff;
+  --muted:rgba(255,255,255,.6);
+  --line:rgba(255,255,255,.12);
+  --radius:20px;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+a{ text-decoration:none; color:inherit; cursor:pointer; }
+.container{width:min(1200px, calc(100% - 40px));margin:auto}
+
+/* NAV */
+.nav{
+  position:fixed;
+  top:0;
+  width:100%;
+  background:rgba(0,0,0,.75);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+  z-index:100;
+}
+.nav-inner{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:16px 0;
+}
+.brand{
+  text-transform:uppercase;
+  font-weight:700;
+  letter-spacing:.2em;
+  font-size:12px;
+}
+.navlinks{
+  display:flex;
+  gap:20px;
+}
+.navlinks a{
+  font-size:13px;
+  color:var(--muted);
+}
+.navlinks a:hover{
+  color:#fff;
+}
+
+/* HERO */
+.hero{
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding-top:60px;
+  background:
+    linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.85)),
+    url("assets/hero.jpg") center/cover no-repeat;
+}
+.hero h1{
+  font-size:clamp(42px,6vw,80px);
+  margin:0;
+}
+.hero p{
+  margin-top:18px;
+  color:var(--muted);
+  max-width:760px;
+  margin-left:auto;
+  margin-right:auto;
+  line-height:1.6;
+}
+.btn{
+  display:inline-block;
+  margin-top:30px;
+  padding:12px 28px;
+  border:1px solid var(--line);
+  border-radius:999px;
+  font-size:14px;
+}
+.btn:hover{
+  background:rgba(255,255,255,.08);
+}
+
+/* SECTION */
+section{padding:100px 0 70px}
+.section-head{text-align:center;margin-bottom:50px}
+.section-head h2{margin:0;font-size:28px}
+.section-head p{margin-top:10px;color:var(--muted);font-size:14px}
+
+/* FEATURED GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:20px;
+}
+.tile{
+  border-radius:var(--radius);
+  overflow:hidden;
+  border:1px solid var(--line);
+  background:#000;
+}
+.tile img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  aspect-ratio:4/5;
+  display:block;
+  transition:transform .4s ease;
+}
+.tile:hover img{
+  transform:scale(1.07);
+}
+
+/* SHOWCASE VIDEO */
+.showcase{
+  border-radius:var(--radius);
+  overflow:hidden;
+  border:1px solid var(--line);
+  background:#000;
+}
+.showcase video{
+  width:100%;
+  display:block;
+  background:#000;
+}
+
+/* CONTACT */
+.contact{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:30px;
+}
+.contact-card{
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:30px;
+}
+.contact-card h3{
+  margin:0 0 15px;
+}
+
+.contact-card p{
+  margin:8px 0;
+  color:var(--muted);
+}
+.contact-card a{
+  color:#fff;
+  text-decoration:none;
+  border-bottom:1px solid rgba(255,255,255,.28);
+  padding-bottom:2px;
+  transition:border-color .2s ease, opacity .2s ease;
+}
+.contact-card a:hover{
+  border-bottom-color:#fff;
+  opacity:.95;
+}
+
+/* FOOTER */
+footer{
+  text-align:center;
+  padding:40px 0;
+  border-top:1px solid var(--line);
+  color:var(--muted);
+  font-size:13px;
+}
+
+@media(max-width:900px){
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .contact{grid-template-columns:1fr}
+}
+@media(max-width:500px){
+  .grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+
+<div class="nav">
+  <div class="container nav-inner">
+    <div class="brand">MACON BRUNSON PHOTOGRAPHY</div>
+    <div class="navlinks">
+      <a href="./index.html">Home</a>
+      <a href="./gallery.html">Gallery</a>
+      <a href="./videos.html">Video</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</div>
+
+<header class="hero">
+  <div>
+    <h1>Driven By Passion</h1>
+    <p>
+      Capturing the soul of automotive excellence through cinematic photography
+      and dynamic video content. From track days to studio shoots,
+      bringing machines to life.
+    </p>
+    <a class="btn" href="./gallery.html">View Full Gallery</a>
+  </div>
+</header>
+
+<section>
+  <div class="container">
+    <div class="section-head">
+      <h2>Featured Work</h2>
+      <p>Explore the full gallery for more.</p>
+    </div>
+
+    <div class="grid">
+      <a class="tile" href="./gallery.html"><img src="assets/photos/p1.jpg"></a>
+      <a class="tile" href="./gallery.html"><img src="assets/photos/p2.jpg"></a>
+      <a class="tile" href="./gallery.html"><img src="assets/photos/p3.jpg"></a>
+      <a class="tile" href="./gallery.html"><img src="assets/photos/p4.jpg"></a>
+      <a class="tile" href="./gallery.html"><img src="assets/photos/p5.jpg"></a>
+      <a class="tile" href="./gallery.html"><img src="assets/photos/p6.jpg"></a>
+      <a class="tile" href="./gallery.html"><img src="assets/photos/p7.jpg"></a>
+      <a class="tile" href="./gallery.html"><img src="assets/photos/p8.jpg"></a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-head">
+      <h2>Showcase Reel</h2>
+    </div>
+
+    <div class="showcase">
+      <video controls playsinline preload="metadata">
+        <source src="assets/videos/v1.mp4" type="video/mp4">
+      </video>
+    </div>
+
+    <div style="text-align:center;margin-top:20px;">
+      <a class="btn" href="./videos.html">See All Videos</a>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <div class="section-head">
+      <h2>Contact</h2>
+    </div>
+
+    <div class="contact">
+      <div class="contact-card">
+        <h3>Direct</h3>
+        <p>
+          Email:
+          <a href="mailto:maconbrunson150@gmail.com">maconbrunson150@gmail.com</a>
+        </p>
+        <p>
+          Phone:
+          <a href="tel:8035967434">803-596-7434</a>
+        </p>
+      </div>
+
+      <div class="contact-card">
+        <h3>Social</h3>
+        <p>
+          Instagram:
+          <a href="https://instagram.com/Maconrackz" target="_blank" rel="noopener">@Maconrackz</a>
+        </p>
+        <p>
+          Snapchat:
+          <a href="https://snapchat.com/add/maconbrunson" target="_blank" rel="noopener">@maconbrunson</a>
+        </p>
+        <p>
+          Twitter:
+          <a href="https://twitter.com/maconbrunson" target="_blank" rel="noopener">@maconbrunson</a>
+        </p>
+        <p>
+          Facebook:
+          <a href="https://www.facebook.com/search/top?q=macon%20brunson%20photography" target="_blank" rel="noopener">Macon Brunson Photography</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © <span id="year"></span> Macon Brunson Photography
+</footer>
+
+<script>
+document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>

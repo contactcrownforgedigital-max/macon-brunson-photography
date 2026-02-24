@@ -3,31 +3,40 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Video — Macon Brunson Photography</title>
+<title>Macon Brunson Photography — Videos</title>
+
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
 
 <style>
 :root{
   --bg:#0a0a0c;
+  --text:#ffffff;
+  --muted:rgba(255,255,255,.62);
   --line:rgba(255,255,255,.12);
+  --line2:rgba(255,255,255,.18);
+  --surface:rgba(255,255,255,.03);
   --radius:20px;
+  --shadow: 0 20px 70px rgba(0,0,0,.45);
 }
 
 *{box-sizing:border-box}
+html{scroll-behavior:smooth}
 body{
   margin:0;
   background:var(--bg);
-  color:#fff;
+  color:var(--text);
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
 }
-a{text-decoration:none;color:inherit}
-.container{width:min(1100px, calc(100% - 40px));margin:auto}
+a{ text-decoration:none; color:inherit; cursor:pointer; }
+.container{width:min(1200px, calc(100% - 40px));margin:auto}
 
 /* NAV */
 .nav{
   position:fixed;
   top:0;
   width:100%;
-  background:rgba(0,0,0,.7);
+  background:rgba(0,0,0,.75);
   backdrop-filter:blur(12px);
   border-bottom:1px solid var(--line);
   z-index:100;
@@ -40,68 +49,99 @@ a{text-decoration:none;color:inherit}
 }
 .brand{
   text-transform:uppercase;
-  font-weight:700;
-  letter-spacing:.2em;
+  font-weight:760;
+  letter-spacing:.20em;
   font-size:12px;
 }
 .navlinks{
   display:flex;
-  gap:18px;
+  gap:20px;
 }
 .navlinks a{
   font-size:13px;
-  color:#aaa;
+  color:var(--muted);
+  transition:color .2s ease, transform .2s ease;
 }
-.navlinks a:hover{
-  color:#fff;
-}
+.navlinks a:hover{ color:#fff; transform: translateY(-1px); }
 
-/* HEADER */
-header{
-  padding:110px 0 40px;
-  text-align:center;
-}
-header h1{
-  margin:0;
-  font-size:34px;
-}
+/* SECTION */
+main{ padding-top:86px; }
+section{padding:70px 0 40px}
+.section-head{text-align:center;margin-bottom:26px}
+.section-head h1{margin:0;font-size:34px; letter-spacing:-.02em;}
+.section-head p{margin-top:10px;color:var(--muted);font-size:14px; line-height:1.6; max-width:75ch; margin-left:auto; margin-right:auto;}
 
-/* GRID */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:24px;
-  padding:20px 0 80px;
-}
-
-.card{
+.btn{
+  display:inline-block;
+  margin-top:18px;
+  padding:12px 28px;
   border:1px solid var(--line);
+  border-radius:999px;
+  font-size:14px;
+  transition: background .2s ease, border-color .2s ease, transform .2s ease;
+}
+.btn:hover{
+  background:rgba(255,255,255,.08);
+  border-color: var(--line2);
+  transform: translateY(-1px);
+}
+
+/* SHOWCASE */
+.showcase{
   border-radius:var(--radius);
   overflow:hidden;
+  border:1px solid var(--line);
   background:#000;
-  transition:transform .3s ease;
+  box-shadow: var(--shadow);
 }
-
-.card:hover{
-  transform:translateY(-4px);
-}
-
-video{
+.showcase video{
   width:100%;
   display:block;
   background:#000;
 }
 
-footer{
-  text-align:center;
-  padding:40px 0;
-  border-top:1px solid var(--line);
-  color:#777;
-  font-size:13px;
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:20px;
+}
+.card{
+  border-radius:var(--radius);
+  overflow:hidden;
+  border:1px solid var(--line);
+  background:#000;
+  box-shadow: 0 0 0 rgba(0,0,0,0);
+  transform: translateY(0);
+  transition: transform .28s ease, border-color .28s ease, box-shadow .28s ease;
+}
+.card:hover{
+  transform: translateY(-3px);
+  border-color: var(--line2);
+  box-shadow: var(--shadow);
+}
+.card video{
+  width:100%;
+  display:block;
+  aspect-ratio:16/9;
+  object-fit:cover;
+  background:#000;
 }
 
-@media(max-width:900px){
-  .grid{grid-template-columns:1fr}
+/* reveal */
+.reveal{ opacity:0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.in{ opacity:1; transform: translateY(0); }
+
+@media(max-width:1000px){
+  .grid{ grid-template-columns:repeat(2, 1fr); }
+}
+@media(max-width:600px){
+  .grid{ grid-template-columns:1fr; }
+}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  .card, .btn, .navlinks a{transition:none}
+  .reveal{opacity:1; transform:none; transition:none}
 }
 </style>
 </head>
@@ -114,57 +154,75 @@ footer{
     <div class="navlinks">
       <a href="./index.html">Home</a>
       <a href="./gallery.html">Gallery</a>
-      <a href="./videos.html">Video</a>
+      <a href="./videos.html" style="color:#fff;">Video</a>
+      <a href="./index.html#contact">Contact</a>
     </div>
   </div>
 </div>
 
-<header class="container">
-  <h1>Video</h1>
-</header>
+<main>
+  <section class="reveal">
+    <div class="container">
+      <div class="section-head">
+        <h1>Video Showcase</h1>
+      </div>
 
-<main class="container">
-  <div class="grid">
+      <div class="showcase">
+        <video controls playsinline preload="metadata">
+          <source src="assets/videos/v6.mp4" type="video/mp4">
+        </video>
+      </div>
 
-    <div class="card">
-      <video controls playsinline preload="metadata">
-        <source src="assets/videos/v1.mp4" type="video/mp4">
-      </video>
+      <div style="text-align:center;">
+        <a class="btn" href="./gallery.html">View Gallery</a>
+      </div>
     </div>
+  </section>
 
-    <div class="card">
-      <video controls playsinline preload="metadata">
-        <source src="assets/videos/v2.mp4" type="video/mp4">
-      </video>
+  <section class="reveal">
+    <div class="container">
+      <div class="section-head" style="margin-bottom:20px;">
+        <h1 style="font-size:22px; margin:0;">All Videos</h1>
+      </div>
+
+      <div class="grid" id="videoGrid"></div>
     </div>
-
-    <div class="card">
-      <video controls playsinline preload="metadata">
-        <source src="assets/videos/v3.mp4" type="video/mp4">
-      </video>
-    </div>
-
-    <div class="card">
-      <video controls playsinline preload="metadata">
-        <source src="assets/videos/v4.mp4" type="video/mp4">
-      </video>
-    </div>
-
-    <div class="card">
-      <video controls playsinline preload="metadata">
-        <source src="assets/videos/v5.mp4" type="video/mp4">
-      </video>
-    </div>
-
-  </div>
+  </section>
 </main>
 
-<footer>
-  © <span id="year"></span> Macon Brunson Photography
-</footer>
-
 <script>
-document.getElementById("year").textContent = new Date().getFullYear();
+/* change this when you add more videos */
+const TOTAL_VIDEOS = 6;
+
+const grid = document.getElementById("videoGrid");
+
+function addVideo(i){
+  const card = document.createElement("div");
+  card.className = "card";
+  card.innerHTML = `
+    <video controls playsinline preload="metadata">
+      <source src="assets/videos/v${i}.mp4" type="video/mp4">
+    </video>
+  `;
+
+  const v = card.querySelector("video");
+  v.addEventListener("error", () => card.remove()); // hides missing files safely
+  grid.appendChild(card);
+}
+
+for(let i=1;i<=TOTAL_VIDEOS;i++) addVideo(i);
+
+/* reveal on scroll */
+const revealEls = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      e.target.classList.add('in');
+      io.unobserve(e.target);
+    }
+  });
+},{threshold:0.12});
+revealEls.forEach(el => io.observe(el));
 </script>
 
 </body>
